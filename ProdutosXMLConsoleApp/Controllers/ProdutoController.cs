@@ -50,7 +50,7 @@ namespace Projeto02.Controllers
                 produto.Categoria = categoria;
 
 
-                Console.Write("\nESCOLHA XML OU JSON..: ");
+                Console.Write("\tESCOLHA XML OU JSON..............: ");
                 var opcao = Console.ReadLine();
 
                 IProdutoRepository produtoRepository = null;
@@ -64,7 +64,7 @@ namespace Projeto02.Controllers
                         produtoRepository = new ProdutoRepositoryJSON();
                         break;
                     default:
-                        Console.WriteLine("\nOpção inválida!");
+                        Console.WriteLine("\tOpção inválida!");
                         break;
                 }
 
