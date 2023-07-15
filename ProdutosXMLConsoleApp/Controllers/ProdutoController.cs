@@ -1,4 +1,5 @@
 ﻿using ProdutosXMLConsoleApp.Entities;
+using ProdutosXMLConsoleApp.Interfaces;
 using ProdutosXMLConsoleApp.Repositories;
 using System;
 using System.Collections.Generic;
@@ -49,8 +50,23 @@ namespace Projeto02.Controllers
                 produto.Categoria = categoria;
 
 
-                //exportar o produto para um arquivo de extensão XML
-                var produtoRepository = new ProdutoRepository();
+                Console.Write("\nESCOLHA XML OU JSON..: ");
+                var opcao = Console.ReadLine();
+
+                IProdutoRepository produtoRepository = null;
+
+                switch (opcao)
+                {
+                    case "XML":
+                        produtoRepository = new ProdutoRepositoryXML();
+                        break;
+                    case "JSON":
+                        produtoRepository = new ProdutoRepositoryJSON();
+                        break;
+                    default:
+                        Console.WriteLine("\nOpção inválida!");
+                        break;
+                }
 
                 produtoRepository.Exportar(produto);
 

@@ -21,11 +21,61 @@ namespace ProdutosXMLConsoleApp.Entities
             _idProduto = Guid.NewGuid();
         }
 
-        public Guid IdProduto { get => _idProduto; set => _idProduto = value; }
-        public string Nome { get => _nome; set => _nome = value; }
-        public double Preco { get => _preco; set => _preco = value; }
-        public int Quantidade { get => _quantidade; set => _quantidade = value; }
-        public DateTime DataCompra { get => _dataCompra; set => _dataCompra = value; }
+        public Guid IdProduto
+        {
+            get => _idProduto;
+            set
+            {
+                if (value == Guid.Empty)
+                    throw new ArgumentException("O Id do produto é obrigatório.");
+
+                _idProduto = value;
+            }
+        }
+        public string Nome
+        {
+            get => _nome;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length < 6 || value.Length > 150)
+                    throw new ArgumentException("O nome do produto deve ter entre 6 e 150 caracteres.");
+
+                _nome = value;
+            }
+        }
+        public double Preco
+        {
+            get => _preco;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("O preço do produto deve ser maior que zero.");
+
+                _preco = value;
+            }
+        }
+        public int Quantidade
+        {
+            get => _quantidade;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("A quantidade do produto deve ser maior que zero.");
+
+                _quantidade = value;
+            }
+        }
+        public DateTime DataCompra
+        {
+            get => _dataCompra;
+            set
+            {
+                if (value == DateTime.MinValue)
+                    throw new ArgumentException("A data de compra do produto é obrigatória.");
+
+                _dataCompra = value;
+            }
+        }
         public Fornecedor Fornecedor { get => _fornecedor; set => _fornecedor = value; }
         public Categoria Categoria { get => _categoria; set => _categoria = value; }
     }
